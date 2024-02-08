@@ -1,0 +1,88 @@
+﻿@model PassionProject_DentistAppointment.Models.DentistDto
+
+
+@{
+    ViewBag.Title = "View";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: #555;
+        }
+
+        .dentist-name {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .info {
+            margin-bottom: 10px;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+
+        .value {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/Dentist/List" class="back-link">Go back to list</a>
+        <br />
+        <a href="/Dentist/Edit/@Model.DentistID">Update</a>
+        <br />
+        <a href="/Dentist/DeleteConfirm/@Model.DentistID">Delete</a>
+        <br />
+        <h2 class="dentist-name">@Model.DentistName</h2>
+        <div class="info">
+            <div class="label">Specialization:</div>
+            <div class="value">@Model.Specialization</div>
+        </div>
+        <div class="info">
+            <div class="label">Phone:</div>
+            <div class="value">@Model.Phone</div>
+        </div>
+        <div class="info">
+            <div class="label">Email:</div>
+            <div class="value">@Model.Email</div>
+        </div>
+        <div class="info">
+            <div class="label">Address:</div>
+            <div class="value">@Model.Address</div>
+        </div>
+        <div class="info">
+            <div class="label">Rating:</div>
+            <div class="value">@Model.Rating</div>
+        </div>
+    </div>
+</body>
+</html>
+
+

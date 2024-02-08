@@ -1,0 +1,33 @@
+﻿﻿@model PassionProject_DentistAppointment.Models.DentistDto
+
+@{
+    ViewBag.Title = "DeleteConfirm";
+}
+
+<h2>Are you sure you want to delete this Dentist?</h2>
+<a href="/Dentist/List">Cancel</a>
+<h2>@Model.DentistName</h2>
+<div class="info">
+    <div class="label">Specialization:</div>
+    <div class="value">@Model.Specialization</div>
+</div>
+<div class="info">
+    <div class="label">Phone:</div>
+    <div class="value">@Model.Phone</div>
+</div>
+<div class="info">
+    <div class="label">Email:</div>
+    <div class="value">@Model.Email</div>
+</div>
+<div class="info">
+    <div class="label">Address:</div>
+    <div class="value">@Model.Address</div>
+</div>
+<div class="info">
+    <div class="label">Rating:</div>
+    <div class="value">@Model.Rating</div>
+</div>
+<form action="/Dentist/Delete/@Model.DentistID" method="POST">
+    <input type="submit" value="Confirm Delete" />
+
+</form>

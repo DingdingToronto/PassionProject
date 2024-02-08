@@ -1,0 +1,9 @@
+﻿{
+  "DentistID": 11,
+  "DentistName": "Updated Name",
+  "Specialization": "Updated Specialization",
+  "Phone": "Updated Phone",
+  "Email": "updated.email@example.com",
+  "Address": "Updated Address",
+  "Rating": 4
+}
