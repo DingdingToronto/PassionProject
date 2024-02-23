@@ -49,15 +49,46 @@
         .value {
             margin-left: 10px;
         }
+        /* Styles for the links */
+        .update-link,
+        .delete-link {
+            display: inline-block;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            margin-bottom: 10px;
+        }
+
+        /* Styles for the Update link */
+        .update-link {
+            background-color: #007bff;
+            color: #ffffff;
+            border: 1px solid #007bff;
+        }
+
+        /* Styles for the Delete link */
+        .delete-link {
+            background-color: #dc3545;
+            color: #ffffff;
+            border: 1px solid #dc3545;
+        }
+
+            /* Hover styles for both links */
+            .update-link:hover,
+            .delete-link:hover {
+                background-color: #0056b3;
+                color: #ffffff;
+            }
     </style>
 </head>
 <body>
     <div class="container">
         <a href="/Appointment/List" class="back-link">Go back to list</a>
         <br />
-        <a href="/Appointment/Edit/@Model.AppointmentID">Update</a>
+        <a href="/Appointment/Edit/@Model.AppointmentID" class="update-link">Update</a>
         <br />
-        <a href="/Appointment/DeleteConfirm/@Model.AppointmentID">Delete</a>
+        <a href="/Appointment/DeleteConfirm/@Model.AppointmentID" class="delete-link">Delete</a>
         <br />
         <h2 class="dentist-name">@Model.AppointmentDate</h2>     
         

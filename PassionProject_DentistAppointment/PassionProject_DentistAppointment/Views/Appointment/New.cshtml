@@ -49,6 +49,7 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            margin-top:15px;
         }
 
             input[type="submit"]:hover {
@@ -58,17 +59,30 @@
 </head>
 <body>
     <div class="container">
-        <h2 class="header">Create Apoointment</h2>
-        <form action="/Appointment/Create" method="POST">
+        <h2 class="header">Create Appointment</h2>
+        <form id="appointmentForm" action="/Appointment/Create" method="POST" onsubmit="return validateForm()">
             <div>
-                <label>New Appointment Date:</label> <input type="text" name="AppointmentDate" />
+                <label>New Appointment Date:</label> <input type="date" name="AppointmentDate" required />
             </div>
-            
+            <div>
                 <input type="submit" value="Add Appointment" />
-            
+            </div>
         </form>
     </div>
+
+    <script>
+        function validateForm() {
+            var form = document.getElementById('appointmentForm');
+            if (!form.checkValidity()) {
+                // If the form is invalid, display appropriate error messages
+                form.reportValidity();
+                return false;
+            }
+            return true;
+        }
+    </script>
 </body>
 </html>
+
 
 

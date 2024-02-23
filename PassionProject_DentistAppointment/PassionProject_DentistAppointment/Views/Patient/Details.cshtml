@@ -49,15 +49,104 @@
         .value {
             margin-left: 10px;
         }
+        /* Styles for the links */
+        .update-link,
+        .delete-link {
+            display: inline-block;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            margin-bottom: 10px;
+        }
+
+        /* Styles for the Update link */
+        .update-link {
+            background-color: #007bff;
+            color: #ffffff;
+            border: 1px solid #007bff;
+        }
+
+        /* Styles for the Delete link */
+        .delete-link {
+            background-color: #dc3545;
+            color: #ffffff;
+            border: 1px solid #dc3545;
+        }
+
+            /* Hover styles for both links */
+            .update-link:hover,
+            .delete-link:hover {
+                background-color: #0056b3;
+                color: #ffffff;
+            }
+            /*------------------------------------------------------------------------------------------------*/
+        .dentist-bookings-section {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .patient-name {
+            font-weight: bold;
+        }
+
+        .dentist-booking {
+            margin-bottom: 10px;
+        }
+
+        .dentist-name {
+            display: inline-block;
+            width: 200px;
+        }
+
+        .cancel-link {
+            color: #ab2020;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+
+        .new-appointment-section {
+            margin-top: 20px;
+        }
+
+        .dentist-dropdown {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .book-dentist-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+            .book-dentist-button:hover {
+                background-color: #45a049;
+            }
+
     </style>
 </head>
 <body>
     <div class="container">
         <a href="/Patient/List" class="back-link">Go back to list</a>
         <br />
-        <a href="/Patient/Edit/@Model.SelectedPatient.PatientID">Update</a>
+        <a href="/Patient/Edit/@Model.SelectedPatient.PatientID" class="update-link">Update</a>
         <br />
-        <a href="/Patient/DeleteConfirm/@Model.SelectedPatient.PatientID">Delete</a>
+        <a href="/Patient/DeleteConfirm/@Model.SelectedPatient.PatientID" class="delete-link">Delete</a>
         <br />
         <h2 class="dentist-name">@Model.SelectedPatient.PatientName</h2>
         <div class="info">
@@ -69,25 +158,30 @@
             <div class="value">@Model.SelectedPatient.Email</div>
         </div>
     </div>
-    <div>
-        <h2>Dentist booked by @Model.SelectedPatient.PatientName:</h2>
+    <div class="dentist-bookings-section">
+        <h2>Dentist booked by <span class="patient-name">@Model.SelectedPatient.PatientName</span>:</h2>
         @foreach (var dentist in Model.BookedDentist)
         {
-            <a>@dentist.DentistName</a> <a style="color:#ab2020;" href="/patient/Unassociate/@Model.SelectedPatient.PatientID?DentistID=@dentist.DentistID">[x]</a><br />
+            <div class="dentist-booking">
+                <a class="dentist-name">@dentist.DentistName</a>
+                <a class="cancel-link" href="/patient/Unassociate/@Model.SelectedPatient.PatientID?DentistID=@dentist.DentistID">Cancel</a>
+            </div>
         }
 
-        <div>
-            <h4>Make a new Appointment for @Model.SelectedPatient.PatientName</h4>
+        <div class="new-appointment-section">
+            <h4>Make a new Appointment for <span class="patient-name">@Model.SelectedPatient.PatientName</span></h4>
             <form method="POST" action="/patient/Associate/@Model.SelectedPatient.PatientID">
-                <select name="DentistID">
+                <label for="dentist-dropdown">Select Dentist:</label>
+                <select id="dentist-dropdown" name="DentistID" class="dentist-dropdown">
                     @foreach (var dentist in Model.AvailableDentist)
                     {
                         <option value="@dentist.DentistID">@dentist.DentistName</option>
                     }
                 </select>
-                <input type="submit" value="Book New Dentist" />
+                <button type="submit" class="book-dentist-button">Book New Dentist</button>
             </form>
         </div>
     </div>
+
 </body>
 

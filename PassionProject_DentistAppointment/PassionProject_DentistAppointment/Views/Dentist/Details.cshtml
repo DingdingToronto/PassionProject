@@ -39,25 +39,158 @@
         }
 
         .info {
-            margin-bottom: 10px;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            border: 2px solid #ddd;
+            background-color: #f9f9f9;
         }
 
         .label {
             font-weight: bold;
+            color: #333;
         }
 
         .value {
             margin-left: 10px;
+            color: #666;
         }
+
+        /* Add border-bottom to separate .info sections */
+        .info:not(:last-child) {
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* Styles for the links */
+        .update-link,
+        .delete-link {
+            display: inline-block;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            margin-bottom: 10px;
+        }
+
+        /* Styles for the Update link */
+        .update-link {
+            background-color: #007bff;
+            color: #ffffff;
+            border: 1px solid #007bff;
+        }
+
+        /* Styles for the Delete link */
+        .delete-link {
+            background-color: #dc3545;
+            color: #ffffff;
+            border: 1px solid #dc3545;
+        }
+
+            /* Hover styles for both links */
+            .update-link:hover,
+            .delete-link:hover {
+                background-color: #0056b3;
+                color: #ffffff;
+            }
+              /* Styles for the links */
+        .update-link,
+        .delete-link {
+            display: inline-block;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            margin-bottom: 10px;
+        }
+
+        /* Styles for the Update link */
+        .update-link {
+            background-color: #007bff;
+            color: #ffffff;
+            border: 1px solid #007bff;
+        }
+
+        /* Styles for the Delete link */
+        .delete-link {
+            background-color: #dc3545;
+            color: #ffffff;
+            border: 1px solid #dc3545;
+        }
+
+        /* Hover styles for both links */
+        .update-link:hover,
+        .delete-link:hover {
+            background-color: #0056b3;
+            color: #ffffff;
+        }
+        /*--------------------------------------------------------------------------------------------------*/
+        .appointments-section {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .dentist-name {
+            font-weight: bold;
+        }
+
+        .appointment {
+            margin-bottom: 10px;
+        }
+
+        .appointment-date {
+            display: inline-block;
+            width: 150px;
+        }
+
+        .cancel-link {
+            color: #ab2020;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+
+        .new-appointment-section {
+            margin-top: 20px;
+        }
+
+        .appointment-dropdown {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .book-appointment-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+            .book-appointment-button:hover {
+                background-color: #45a049;
+            }
+
+
     </style>
 </head>
 <body>
     <div class="container">
         <a href="/Dentist/List" class="back-link">Go back to list</a>
         <br />
-        <a href="/Dentist/Edit/@Model.SelectedDentist.DentistID">Update</a>
+        <a href="/Dentist/Edit/@Model.SelectedDentist.DentistID" class="update-link">Update</a>
         <br />
-        <a href="/Dentist/DeleteConfirm/@Model.SelectedDentist.DentistID">Delete</a>
+        <a href="/Dentist/DeleteConfirm/@Model.SelectedDentist.DentistID" class="delete-link">Delete</a>
         <br />
         <h2 class="dentist-name">@Model.SelectedDentist.DentistName</h2>
         <div class="info">
@@ -81,26 +214,30 @@
             <div class="value">@Model.SelectedDentist.Rating</div>
         </div>
     </div>
-    <div>
-        <h2>Appointments booked by @Model.SelectedDentist.DentistName:</h2>
+    <div class="appointments-section">
+        <h2>Appointments available by <span class="dentist-name">@Model.SelectedDentist.DentistName</span>:</h2>
         @foreach (var appointment in Model.BookedAppointments)
         {
-            <a>@appointment.AppointmentDate</a> <a style="color:#ab2020;" href="/dentist/Unassociate/@Model.SelectedDentist.DentistID?AppointmentID=@appointment.AppointmentID">[x]</a><br />
+            <div class="appointment">
+                <a>@appointment.AppointmentDate</a>
+                <a class="cancel-link" href="/dentist/Unassociate/@Model.SelectedDentist.DentistID?AppointmentID=@appointment.AppointmentID">[x]</a>
+            </div>
         }
 
-        <div>
-            <h4>Make a new Appointment with @Model.SelectedDentist.DentistName</h4>
+        <div class="new-appointment-section">
+            <h4>Post a new Appointment from <span class="dentist-name">@Model.SelectedDentist.DentistName</span></h4>
             <form method="POST" action="/Dentist/Associate/@Model.SelectedDentist.DentistID">
-                <select name="AppointmentID">
+                <select name="AppointmentID" class="appointment-dropdown">
                     @foreach (var appointment in Model.AvailableAppointments)
                     {
                         <option value="@appointment.AppointmentID">@appointment.AppointmentDate</option>
                     }
                 </select>
-                <input type="submit" value="Book New Appointment" />
+                <input type="submit" value="Book New Appointment" class="book-appointment-button" />
             </form>
         </div>
     </div>
+
 </body>
 
 
