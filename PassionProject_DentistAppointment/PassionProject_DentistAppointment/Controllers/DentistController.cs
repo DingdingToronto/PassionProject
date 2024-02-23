@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Diagnostics;
 using PassionProject_DentistAppointment.Models;
 using System.Web.Script.Serialization;
-
+using PassionProject_DentistAppointment.Models.Viewmodels;
 
 namespace PassionProject_DentistAppointment.Controllers
 {
@@ -46,8 +46,7 @@ namespace PassionProject_DentistAppointment.Controllers
         // GET: Dentist/Details/5
         public ActionResult Details(int id)
         {
-            //objective: communicate with our dentist data api to retrieve one dentist
-            //curl https://localhost:44366/api/dentistdata/finddentist/{id}
+            DetailsDentist ViewModel = new DetailsDentist();
 
             string url = "dentistsdata/finddentist/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
@@ -55,13 +54,65 @@ namespace PassionProject_DentistAppointment.Controllers
             Debug.WriteLine("The response code is ");
             Debug.WriteLine(response.StatusCode);
 
-            DentistDto selecteddentist = response.Content.ReadAsAsync<DentistDto>().Result;
-            Debug.WriteLine("dentist received : ");
-            Debug.WriteLine(selecteddentist.Specialization);
+            DentistDto selectedDentist = response.Content.ReadAsAsync<DentistDto>().Result;
+            Debug.WriteLine("Dentist received : ");
+            Debug.WriteLine(selectedDentist.Specialization);
+
+            ViewModel.SelectedDentist = selectedDentist;
+
+            
+            url = "appointmentsdata/listAppointmentForDentist/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<AppointmentDto> SelectedAppointments = response.Content.ReadAsAsync<IEnumerable<AppointmentDto>>().Result;
+
+            ViewModel.BookedAppointments = SelectedAppointments;
 
 
-            return View(selecteddentist);
+            url = "appointmentsdata/listAppointmentNotForDentist/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<AppointmentDto> AvailableAppointment = response.Content.ReadAsAsync<IEnumerable<AppointmentDto>>().Result;
+
+            ViewModel.AvailableAppointments = AvailableAppointment;
+
+
+
+
+            return View(ViewModel);
         }
+
+
+        
+        [HttpPost]
+        public ActionResult Associate(int id, int appointmentid)
+        {
+            Debug.WriteLine("Attempting to associate dentist :" + id + " with appointment " + appointmentid);
+
+           
+            string url = "appointmentsdata/AssociateAppointmentWithDentist/" + id + "/" + appointmentid;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+            return RedirectToAction("Details/" + id);
+        }
+
+        [HttpGet]
+        public ActionResult UnAssociate(int id, int AppointmentID)
+        {
+            Debug.WriteLine("Attempting to unassociate dentist :" + id + " with appointment: " + AppointmentID);
+
+            //call our api to associate animal with keeper
+            string url = "appointmentsdata/unassociateappointmentwithdentist/" + id + "/" + AppointmentID;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+            return RedirectToAction("Details/" + id);
+        }
+
+
+
+
         public ActionResult Error()
         {
 

@@ -13,6 +13,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Microsoft.Owin.BuilderProperties;
 using PassionProject_DentistAppointment.Models;
+using PassionProject_DentistAppointment.Models.Viewmodels;
 
 namespace PassionProject_DentistAppointment.Controllers
 {
@@ -36,6 +37,91 @@ namespace PassionProject_DentistAppointment.Controllers
 
 
             return AppointmentDtos;
+        }
+
+        [HttpGet]
+        [ResponseType(typeof(AppointmentDto))]
+        public IHttpActionResult listAppointmentForDentist(int id)
+        {
+
+            List<Appointment> Appointments = db.Appointments.Where(
+                k => k.Dentists.Any(
+                    a => a.DentistID == id)
+                ).ToList();
+            List<AppointmentDto> AppointmentDtos = new List<AppointmentDto>();
+
+            Appointments.ForEach(k => AppointmentDtos.Add(new AppointmentDto()
+            {
+                AppointmentID = k.AppointmentID,
+                AppointmentDate = k.AppointmentDate,
+                
+            }));
+
+            return Ok(AppointmentDtos);
+        }
+       
+        [HttpGet]
+        [ResponseType(typeof(AppointmentDto))]
+        public IHttpActionResult listAppointmentNotForDentist(int id)
+        {
+            List<Appointment> Appointments = db.Appointments.Where(
+                k => !k.Dentists.Any(
+                    a => a.DentistID == id)
+                ).ToList();
+            List<AppointmentDto> AppointmentDtos = new List<AppointmentDto>();
+
+            Appointments.ForEach(k => AppointmentDtos.Add(new AppointmentDto()
+            {
+                AppointmentID = k.AppointmentID,
+                AppointmentDate = k.AppointmentDate,
+            }));
+
+            return Ok(AppointmentDtos);
+        }
+        [HttpPost]
+        [Route("api/appointmentsdata/AssociateAppointmentWithDentist/{dentistid}/{appointmentid}")]
+        public IHttpActionResult AssociateAnimalWithKeeper(int dentistid, int appointmentid)
+        {
+
+            Dentist SelectedDentist = db.Dentists.Include(a => a.Appointments).Where(a => a.DentistID == dentistid).FirstOrDefault();
+            Appointment SelectedAppointment = db.Appointments.Find(appointmentid);
+
+            if (SelectedDentist == null || SelectedAppointment == null)
+            {
+                return NotFound();
+            }
+
+            Debug.WriteLine("input dentist id is: " + dentistid);
+            Debug.WriteLine("selected dentist name is: " + SelectedDentist.DentistName);
+            Debug.WriteLine("input appointment id is: " + appointmentid);
+            Debug.WriteLine("selected appointment date is: " + SelectedAppointment.AppointmentDate);
+
+
+
+            SelectedDentist.Appointments.Add(SelectedAppointment);
+            db.SaveChanges();
+
+            return Ok();
+        }
+        [HttpPost]
+        [Route("api/AppointmentsData/UnAssociateAppointmentWithDentist/{dentistid}/{appointmentid}")]
+        public IHttpActionResult UnAssociateAppointmentWithDentist(int dentistid, int appointmentid)
+        {
+
+            Dentist SelectedDentist = db.Dentists.Include(a => a.Appointments).Where(a => a.DentistID == dentistid).FirstOrDefault();
+            Appointment SelectedAppointment = db.Appointments.Find(appointmentid);
+
+            if (SelectedDentist == null || SelectedAppointment == null)
+            {
+                return NotFound();
+            }
+
+            //todo: verify that the keeper actually is keeping track of the animal
+
+            SelectedDentist.Appointments.Remove(SelectedAppointment);
+            db.SaveChanges();
+
+            return Ok();
         }
 
 

@@ -29,6 +29,9 @@ namespace PassionProject_DentistAppointment.Models
         // Navigation property for appointments
         public virtual ICollection<Appointment> Appointments { get; set; }
 
+        public virtual ICollection<Patient> Patient { get; set; }
+        public virtual ICollection<PatientDentistAppointment> PatientDentistAppointments { get; set; }
+
     }
 
     public class DentistDto

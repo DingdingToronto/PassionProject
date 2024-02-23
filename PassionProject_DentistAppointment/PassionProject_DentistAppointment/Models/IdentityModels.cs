@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using PassionProject_DentistAppointment.Migrations;
 
 namespace PassionProject_DentistAppointment.Models
 {
@@ -32,9 +33,13 @@ namespace PassionProject_DentistAppointment.Models
         public DbSet<Appointment> Appointments { get; set; }
 
 
+        
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<PassionProject_DentistAppointment.Models.Patient> Patients { get; set; }
     }
 }

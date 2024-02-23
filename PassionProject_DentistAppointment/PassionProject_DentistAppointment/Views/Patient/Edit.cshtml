@@ -1,0 +1,34 @@
+﻿﻿@model PassionProject_DentistAppointment.Models.PatientDto
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit Patient</h2>
+
+<form method="POST" action="/patient/Update/@Model.PatientID">
+    <div>
+        <label>ID</label>
+        <input type="text" name="PatientID" value="@Model.PatientID" readonly />
+    </div>
+    <div>
+        <label>Name</label>
+        <input type="text" name="PatientName" value="@Model.PatientName" />
+    </div>
+    <div>
+        <label>Phone</label>
+        <input type="text" name="Phone" value="@Model.Phone" />
+    </div>
+    <div>
+        <label>Email</label>
+        <input type="text" name="Email" value="@Model.Email" />
+    </div>
+    <div>
+
+
+        <input type="submit" value="Update" />
+    </div>
+
+</form>
+
+

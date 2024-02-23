@@ -1,0 +1,93 @@
+﻿@model PassionProject_DentistAppointment.Models.Viewmodels.DetailsPatient
+
+
+@{
+    ViewBag.Title = "View";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: #555;
+        }
+
+        .dentist-name {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .info {
+            margin-bottom: 10px;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+
+        .value {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/Patient/List" class="back-link">Go back to list</a>
+        <br />
+        <a href="/Patient/Edit/@Model.SelectedPatient.PatientID">Update</a>
+        <br />
+        <a href="/Patient/DeleteConfirm/@Model.SelectedPatient.PatientID">Delete</a>
+        <br />
+        <h2 class="dentist-name">@Model.SelectedPatient.PatientName</h2>
+        <div class="info">
+            <div class="label">Phone:</div>
+            <div class="value">@Model.SelectedPatient.Phone</div>
+        </div>
+        <div class="info">
+            <div class="label">Email:</div>
+            <div class="value">@Model.SelectedPatient.Email</div>
+        </div>
+    </div>
+    <div>
+        <h2>Dentist booked by @Model.SelectedPatient.PatientName:</h2>
+        @foreach (var dentist in Model.BookedDentist)
+        {
+            <a>@dentist.DentistName</a> <a style="color:#ab2020;" href="/patient/Unassociate/@Model.SelectedPatient.PatientID?DentistID=@dentist.DentistID">[x]</a><br />
+        }
+
+        <div>
+            <h4>Make a new Appointment for @Model.SelectedPatient.PatientName</h4>
+            <form method="POST" action="/patient/Associate/@Model.SelectedPatient.PatientID">
+                <select name="DentistID">
+                    @foreach (var dentist in Model.AvailableDentist)
+                    {
+                        <option value="@dentist.DentistID">@dentist.DentistName</option>
+                    }
+                </select>
+                <input type="submit" value="Book New Dentist" />
+            </form>
+        </div>
+    </div>
+</body>
+

@@ -59,7 +59,7 @@
 <body>
     <div class="container">
         <h2 class="header">List</h2>
-        <a href="/Dentist/New" class="new-dentist-link">New Dentist</a>
+        <a href="/Dentist/New" class="new-dentist-link">New Dentist</a><br />
         @foreach (var dentist in Model)
         {
             <h2><a href="/Dentist/Details/@dentist.DentistID" class="dentist-link">@dentist.DentistName</a></h2>

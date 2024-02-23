@@ -1,4 +1,4 @@
-﻿@model PassionProject_DentistAppointment.Models.DentistDto
+﻿@model PassionProject_DentistAppointment.Models.Viewmodels.DetailsDentist
 
 
 @{
@@ -22,7 +22,6 @@
             max-width: 800px;
             margin: 20px auto;
             padding: 20px;
-            
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
@@ -56,33 +55,53 @@
     <div class="container">
         <a href="/Dentist/List" class="back-link">Go back to list</a>
         <br />
-        <a href="/Dentist/Edit/@Model.DentistID">Update</a>
+        <a href="/Dentist/Edit/@Model.SelectedDentist.DentistID">Update</a>
         <br />
-        <a href="/Dentist/DeleteConfirm/@Model.DentistID">Delete</a>
+        <a href="/Dentist/DeleteConfirm/@Model.SelectedDentist.DentistID">Delete</a>
         <br />
-        <h2 class="dentist-name">@Model.DentistName</h2>
+        <h2 class="dentist-name">@Model.SelectedDentist.DentistName</h2>
         <div class="info">
             <div class="label">Specialization:</div>
-            <div class="value">@Model.Specialization</div>
+            <div class="value">@Model.SelectedDentist.Specialization</div>
         </div>
         <div class="info">
             <div class="label">Phone:</div>
-            <div class="value">@Model.Phone</div>
+            <div class="value">@Model.SelectedDentist.Phone</div>
         </div>
         <div class="info">
             <div class="label">Email:</div>
-            <div class="value">@Model.Email</div>
+            <div class="value">@Model.SelectedDentist.Email</div>
         </div>
         <div class="info">
             <div class="label">Address:</div>
-            <div class="value">@Model.Address</div>
+            <div class="value">@Model.SelectedDentist.Address</div>
         </div>
         <div class="info">
             <div class="label">Rating:</div>
-            <div class="value">@Model.Rating</div>
+            <div class="value">@Model.SelectedDentist.Rating</div>
+        </div>
+    </div>
+    <div>
+        <h2>Appointments booked by @Model.SelectedDentist.DentistName:</h2>
+        @foreach (var appointment in Model.BookedAppointments)
+        {
+            <a>@appointment.AppointmentDate</a> <a style="color:#ab2020;" href="/dentist/Unassociate/@Model.SelectedDentist.DentistID?AppointmentID=@appointment.AppointmentID">[x]</a><br />
+        }
+
+        <div>
+            <h4>Make a new Appointment with @Model.SelectedDentist.DentistName</h4>
+            <form method="POST" action="/Dentist/Associate/@Model.SelectedDentist.DentistID">
+                <select name="AppointmentID">
+                    @foreach (var appointment in Model.AvailableAppointments)
+                    {
+                        <option value="@appointment.AppointmentID">@appointment.AppointmentDate</option>
+                    }
+                </select>
+                <input type="submit" value="Book New Appointment" />
+            </form>
         </div>
     </div>
 </body>
-</html>
+
 
 
