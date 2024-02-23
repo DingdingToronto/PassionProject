@@ -63,4 +63,4 @@ To add yourself as a dentist:
 
 The Toothache Appointment Booking System is designed to streamline appointment booking for patients and scheduling for dentists. We hope this platform provides a user-friendly experience for both parties. Feel free to reach out with any questions or feedback!
 
-*Note: For technical documentation, please refer to the project's documentation files.*
+
