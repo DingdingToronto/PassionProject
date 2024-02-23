@@ -1,75 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toothache Appointment Booking System</title>
-</head>
-<body>
-    <h1>Toothache Appointment Booking System</h1>
+# Toothache Appointment Booking System
 
-    <h2>Overview</h2>
+## Overview
 
-    <p>Welcome to the Toothache Appointment Booking System GitHub repository! This project aims to simplify the process of booking appointments for patients suffering from toothaches and assist dentists in managing their schedules effectively. The system comprises three main components: dentist, appointment, and patient. This README file provides an overview of the system's functionalities from the perspectives of both patients and dentists.</p>
+Welcome to the Toothache Appointment Booking System GitHub repository! This project aims to simplify the process of booking appointments for patients suffering from toothaches and assist dentists in managing their schedules effectively. The system comprises three main components: dentist, appointment, and patient. This README file provides an overview of the system's functionalities from the perspectives of both patients and dentists.
 
-    <h2>Patient Perspective</h2>
+## Patient Perspective
 
-    <h3>Adding a Patient</h3>
+### Adding a Patient
 
-    <p>To add yourself as a patient:</p>
-    <ol>
-        <li>Click the "Add Patient" button.</li>
-        <li>Fill in your name, phone number, and email address.</li>
-        <li>Submit the form.</li>
-    </ol>
+To add yourself as a patient:
+1. Click the "Add Patient" button.
+2. Fill in your name, phone number, and email address.
+3. Submit the form.
 
-    <h3>Viewing Patient Profile</h3>
+### Viewing Patient Profile
 
-    <p>Your patient profile will appear on the Patient List page. Click your name to view detailed information about your profile.</p>
+- Your patient profile will appear on the Patient List page.
+- Click your name to view detailed information about your profile.
 
-    <h3>Managing Dentist Booking</h3>
+### Managing Dentist Booking
 
-    <p>On your detailed profile page, you can view your information and currently booked dentist. To book a new dentist, select one from the available list and click "Book New Dentist". You can remove your association with a dentist by clicking the red cross icon. Options to update or delete your information are available.</p>
+- On your detailed profile page, you can view your information and currently booked dentist.
+- To book a new dentist, select one from the available list and click "Book New Dentist".
+- You can remove your association with a dentist by clicking the red cross icon.
+- Options to update or delete your information are available.
 
-    <h3>Updating Information</h3>
+### Updating Information
 
-    <p>Click "Update" to edit your existing information.</p>
+- Click "Update" to edit your existing information.
 
-    <h3>Deleting Information</h3>
+### Deleting Information
 
-    <p>Click "Delete" to remove your information.</p>
+- Click "Delete" to remove your information.
 
-    <h2>Dentist Perspective</h2>
+## Dentist Perspective
 
-    <h3>Adding a Dentist</h3>
+### Adding a Dentist
 
-    <p>To add yourself as a dentist:</p>
-    <ol>
-        <li>Click the "New Dentist" button.</li>
-        <li>Fill in the required information.</li>
-        <li>Click "Create".</li>
-    </ol>
+To add yourself as a dentist:
+1. Click the "New Dentist" button.
+2. Fill in the required information.
+3. Click "Create".
 
-    <h3>Viewing Dentist Profile</h3>
+### Viewing Dentist Profile
 
-    <p>Your dentist profile will be listed along with others. Click your name to view detailed information.</p>
+- Your dentist profile will be listed along with others.
+- Click your name to view detailed information.
 
-    <h3>Managing Appointments</h3>
+### Managing Appointments
 
-    <p>Dentists can select available appointments or create new ones.</p>
+- Dentists can select available appointments or create new ones.
 
-    <h3>Updating or Deleting Dentist Profile</h3>
+### Updating or Deleting Dentist Profile
 
-    <p>Dentists can update or delete their profiles.</p>
+- Dentists can update or delete their profiles.
 
-    <h3>Canceling Booked Appointments</h3>
+### Canceling Booked Appointments
 
-    <p>Booked appointments can be canceled.</p>
+- Booked appointments can be canceled.
 
-    <h2>Conclusion</h2>
+## Conclusion
 
-    <p>The Toothache Appointment Booking System is designed to streamline appointment booking for patients and scheduling for dentists. We hope this platform provides a user-friendly experience for both parties. Feel free to reach out with any questions or feedback!</p>
+The Toothache Appointment Booking System is designed to streamline appointment booking for patients and scheduling for dentists. We hope this platform provides a user-friendly experience for both parties. Feel free to reach out with any questions or feedback!
 
-    <p><em>Note: For technical documentation, please refer to the project's documentation files.</em></p>
-</body>
-</html>
+
+
